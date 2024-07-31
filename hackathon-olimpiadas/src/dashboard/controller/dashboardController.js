@@ -9,28 +9,36 @@ const dashboardController =
     const telaEsporte = ref(false);
     const telaEvento = ref(false);
     const telaMedalha = ref(false);
-    const itensPorPagina = ref(25);
     const colunasTabela = ref(colunas);
     const linhasTabela = ref([]);
     const totalItens = ref(0);
+    const paginacaoTabela = ref({});
+    const carregando = ref(false);
 
     onMounted(async () => {
       await buscaMedalhas();
     });
 
     const buscaEventos = async () => {
-      telaEsporte.value = false;
-      telaMedalha.value = false;
-      telaEvento.value = true;
-      eventos.value = await buscaEventosUseCase();
+      try {
+        telaEsporte.value = false;
+        telaMedalha.value = false;
+        telaEvento.value = true;
+
+        eventos.value = await buscaEventosUseCase();
+      } catch {}
     };
 
     const buscaMedalhas = async () => {
+      carregando.value = true;
       telaEsporte.value = false;
       telaEvento.value = false;
       telaMedalha.value = true;
-      medalhas.value = await buscaMedalhasUseCase();
-      console.log(medalhas.value);
+      const { itens, paginacao } = await buscaMedalhasUseCase();
+      medalhas.value = itens;
+      paginacaoTabela.value = paginacao;
+
+      carregando.value = false;
     };
 
     const buscaEsportes = async () => {
@@ -46,8 +54,9 @@ const dashboardController =
       eventos,
       telaEsporte,
       telaEvento,
+      carregando,
       telaMedalha,
-      itensPorPagina,
+      paginacaoTabela,
       colunasTabela,
       linhasTabela,
       totalItens,

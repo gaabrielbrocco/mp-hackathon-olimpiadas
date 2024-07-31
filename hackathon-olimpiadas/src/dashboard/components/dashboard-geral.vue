@@ -10,12 +10,12 @@
             <v-col cols="3">
               <v-row class="d-flex justify-center align-center my-3">
                 <div class="justify-center align-center text-white">
-                  <p class="text-h4 font-weight-thin mb-4 cor-letra">
+                  <div class="text-h2 ml-10 font-weight-thin mb-4 cor-letra">
                     Jogos Olímpicos
                     <span style="color: blue">20</span
                     ><span style="color: white">2</span>
                     <span style="color: red">4</span>
-                  </p>
+                  </div>
                 </div>
               </v-row>
 
