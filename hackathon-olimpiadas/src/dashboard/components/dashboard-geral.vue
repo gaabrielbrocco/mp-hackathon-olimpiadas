@@ -62,6 +62,7 @@
                     height="120"
                     rounded="lg"
                     elevation="2"
+                    @click="controller.buscaMedalhas"
                   >
                     <div class="d-flex flex-column justify-center align-center">
                       <div class="text-disabled mb-2">Medalhas</div>
@@ -77,6 +78,7 @@
                     height="120"
                     rounded="lg"
                     elevation="2"
+                    @click="controller.buscaEsportes"
                   >
                     <div class="d-flex flex-column justify-center align-center">
                       <div class="text-disabled mb-2">Esportes</div>
@@ -85,13 +87,15 @@
                   </v-btn>
                 </v-col>
 
-                <v-col cols="6" class="d-flex justify-center align-center">
+                <v-col cols="12" class="d-flex justify-center align-center">
                   <v-btn
                     color="#232729"
                     width="160"
                     height="120"
                     rounded="lg"
                     elevation="2"
+                    block
+                    @click="controller.buscaEventos"
                   >
                     <div class="d-flex flex-column justify-center align-center">
                       <div class="text-disabled mb-2">Eventos</div>
@@ -99,24 +103,29 @@
                     </div>
                   </v-btn>
                 </v-col>
-
-                <v-col cols="6" class="d-flex justify-center align-center">
-                  <v-btn
-                    color="#232729"
-                    width="160"
-                    height="120"
-                    rounded="lg"
-                    elevation="2"
-                  >
-                  </v-btn>
-                </v-col>
               </v-row>
             </v-col>
 
             <v-col cols="9">
-              <div
-                class="d-flex flex-column fill-height justify-start align-start text-white menu rounded-xl"
-              ></div>
+              <div class="d-flex flex-column fill-height menu rounded-xl">
+                <v-card
+                  class="ma-4 d-flex justify-center align-center"
+                  elevation="0"
+                >
+                  <dashboard-esportes
+                    v-show="controller.telaEsporte.value"
+                    :controller="controller"
+                  />
+                  <dashboard-eventos
+                    v-show="controller.telaEvento.value"
+                    :controller="controller"
+                  />
+                  <dashboard-medalhas
+                    v-show="controller.telaMedalha.value"
+                    :controller="controller"
+                  />
+                </v-card>
+              </div>
             </v-col>
           </v-card-text>
         </v-card>
@@ -126,6 +135,10 @@
 </template>
 
 <script setup>
+import DashboardEsportes from "./dashboard-esportes.vue";
+import DashboardEventos from "./dashboard-eventos.vue";
+import DashboardMedalhas from "./dashboard-medalhas.vue";
+
 const { controller } = defineProps({
   controller: {
     type: Object,
