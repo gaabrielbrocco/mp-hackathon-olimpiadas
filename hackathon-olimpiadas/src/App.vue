@@ -9,3 +9,8 @@
 <script setup>
 import dashboard from "./dashboard/view/dashboard.vue";
 </script>
+<style>
+main {
+  background-color: #303438;
+}
+</style>
