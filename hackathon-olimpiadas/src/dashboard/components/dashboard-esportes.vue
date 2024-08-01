@@ -13,6 +13,8 @@
         :class="['card-responsive']"
         height="120"
         width="350"
+        :href="controller.linksExternos[index]"
+        target="_blank"
       >
         <v-row>
           <v-col cols="8">

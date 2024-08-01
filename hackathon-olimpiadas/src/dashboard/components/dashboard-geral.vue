@@ -24,11 +24,14 @@
                   <v-col cols="12">
                     <v-row class="px-4">
                       <v-icon size="large">mdi-map-marker</v-icon>
-                      <span class="text-disabled px-2" style="font-size: 15px"
+                      <span
+                        class="text-disabled px-2 mr-10"
+                        style="font-size: 15px"
                         >Paris, França</span
                       >
-                      <v-spacer></v-spacer>
-                      <v-icon size="large">mdi-calendar-month</v-icon>
+                      <v-icon size="large" class="ml-10"
+                        >mdi-calendar-month</v-icon
+                      >
                       <span class="text-disabled px-2" style="font-size: 15px"
                         >26/07 - 11/08</span
                       >
