@@ -1,12 +1,11 @@
 import Medalha from "@/dashboard/domain/model/medalha";
 
-const buscaMedalhasRepository = (axios) => async () => {
+const buscaMedalhasRepository = (axios) => async (page) => {
   try {
-    const response = await axios.get("/countries");
-    return {
-      itens: response?.data?.data?.map((item) => new Medalha(item)) ?? [],
-      paginacao: response?.data?.meta ?? {},
-    };
+    const response = await axios.get("/countries", {
+      params: { page: page },
+    });
+    return response?.data?.data?.map((item) => new Medalha(item)) ?? [];
   } catch (error) {
     throw error;
   }

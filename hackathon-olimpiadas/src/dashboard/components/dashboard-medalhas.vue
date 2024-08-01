@@ -1,23 +1,28 @@
 <template>
-  <v-skeleton-loader
-    type="table"
-    v-if="controller.carregando.value"
-  ></v-skeleton-loader>
   <v-data-table-server
-    v-else
     fixed-header
-    height="calc(100vh - 250px)"
-    :items-per-page-options="[
-      { value: 30, title: '30' },
-      { value: 50, title: '50' },
-      { value: 100, title: '100' },
-    ]"
+    height="calc(100vh - 260px)"
+    v-model:items-per-page="controller.itemsPerPage.value"
+    @update:options="controller.buscaMedalhas"
+    :mobile="controller.isMobile.value"
+    :items="controller.medalhas.value"
+    :loading="controller.carregando.value"
     :header-props="{ class: 'bg-primary' }"
     :headers="controller.colunasTabela.value"
-    :items="controller.medalhas.value"
-    :items-length="controller.paginacaoTabela.value.total ?? 0"
-    items-per-page="30"
+    :items-length="controller.totalItens.value"
   >
+    <template v-slot:[`item.name`]="{ item }">
+      <div class="d-inline-flex">
+        <v-img
+          :src="item.flag_url"
+          cover
+          width="30"
+          aspect-ratio="16/9"
+          class="mr-3"
+        ></v-img>
+        {{ item.name }}
+      </div>
+    </template>
   </v-data-table-server>
 </template>
 
@@ -33,5 +38,9 @@ const { controller } = defineProps({
 <style scoped>
 .v-table {
   background-color: rgb(var(--v-theme-primary)) !important;
+}
+
+:deep(.v-data-table-footer__items-per-page) {
+  display: none;
 }
 </style>
