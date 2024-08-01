@@ -1,12 +1,12 @@
 export const colunas = [
   {
-    title: "Colocação",
-    key: "rank",
+    title: "País",
+    key: "name",
     sortable: false,
   },
   {
-    title: "País",
-    key: "name",
+    title: "Colocação",
+    key: "rank",
     sortable: false,
   },
   {

@@ -1,7 +1,7 @@
 <template>
   <v-data-table-server
     fixed-header
-    height="calc(100vh - 260px)"
+    height="calc(100vh - 270px)"
     v-model:items-per-page="controller.itemsPerPage.value"
     @update:options="controller.buscaMedalhas"
     :mobile="controller.isMobile.value"

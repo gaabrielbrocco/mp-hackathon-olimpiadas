@@ -3,8 +3,8 @@
     <v-main style="padding: 10px 20px">
       <div class="container">
         <v-card
-          class="d-flex flex-column my-10 rounded-xl"
-          style="min-height: 500px"
+          class="d-flex flex-column my-2 rounded-xl"
+          style="min-height: 810px"
         >
           <v-card-text class="pa-0 background">
             <v-row>

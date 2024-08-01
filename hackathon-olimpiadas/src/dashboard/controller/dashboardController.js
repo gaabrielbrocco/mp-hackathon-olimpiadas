@@ -20,6 +20,13 @@ const dashboardController =
     const isMobile = computed(() => {
       return display.smAndDown.value;
     });
+    const dialogEsportes = ref(false);
+    const esporteSelecionado = ref({});
+
+    const abreDialogEsportes = async (item) => {
+      esporteSelecionado.value = item;
+      dialogEsportes.value = true;
+    };
 
     const buscaEventos = async () => {
       try {
@@ -71,6 +78,9 @@ const dashboardController =
       buscaMedalhas,
       buscaEsportes,
       isMobile,
+      dialogEsportes,
+      abreDialogEsportes,
+      esporteSelecionado,
     };
   };
 
