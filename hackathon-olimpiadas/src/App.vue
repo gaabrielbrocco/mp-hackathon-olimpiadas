@@ -11,6 +11,6 @@ import dashboard from "./dashboard/view/dashboard.vue";
 </script>
 <style>
 main {
-  background-color: #303438;
+  background-color: #030712;
 }
 </style>

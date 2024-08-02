@@ -9,12 +9,13 @@
       lg="4"
     >
       <v-card
-        class="mx-auto py-2 rounded-lg card-esportes"
+        class="mx-auto py-2 rounded-lg"
         :class="['card-responsive']"
         height="120"
         width="350"
         :href="controller.linksExternos[index]"
         target="_blank"
+        variant="outlined"
       >
         <v-row>
           <v-col cols="8">
@@ -53,7 +54,8 @@ const { controller } = defineProps({
 
 <style scoped>
 .card-esportes {
-  background: linear-gradient(90deg, rgb(0, 56, 83) 0%, rgb(23, 183, 176) 100%);
+  background: linear-gradient(90deg, #b0b0b0 0%, #8c8c8c 100%);
+
   /* background: linear-gradient(90deg, rgb(0, 44, 73) 0%, rgb(2, 121, 218) 100%); */
   transition: transform 0.3s ease-in-out;
 }
@@ -64,7 +66,7 @@ const { controller } = defineProps({
 
 .background {
   background-color: rgb(var(--v-theme-primary)) !important;
-  height: 720px;
+  height: 772px;
   overflow-y: auto;
   overflow-x: hidden;
 }

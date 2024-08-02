@@ -17,7 +17,7 @@ const myTheme = {
   colors: {
     // background: "#ffffff",
     // surface: "#FFFFFF",
-    primary: "#232729",
+    primary: "#030712",
     // "primary-darken-1": "#3700B3",
     // secondary: "#03DAC6",
     // "secondary-darken-1": "#018786",

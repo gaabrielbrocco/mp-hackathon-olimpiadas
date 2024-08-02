@@ -29,7 +29,6 @@ const dashboardController =
         telaEvento.value = true;
         botaoAtivo.value = "eventos";
         eventos.value = await buscaEventosUseCase();
-        console.log(eventos.value);
       } catch {}
     };
 

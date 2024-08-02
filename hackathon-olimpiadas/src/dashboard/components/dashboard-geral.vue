@@ -43,7 +43,8 @@
 
                 <v-row class="mb-4">
                   <v-col class="text-justify" cols="12">
-                    <v-row class="d-flex justify-center align-center mt-2"
+                    <v-row
+                      class="d-flex justify-center text-h6 font-weight-thin align-center mt-2"
                       >Paris irá sediar as Olimpíadas pela terceira vez:</v-row
                     >
                     <v-row
@@ -59,8 +60,8 @@
                     <v-btn
                       :color="
                         controller.botaoAtivo.value === 'medalhas'
-                          ? '#b0b0b0'
-                          : '#232729'
+                          ? '#1F232D'
+                          : '#0D111B'
                       "
                       height="100"
                       width="100%"
@@ -86,8 +87,8 @@
                     <v-btn
                       :color="
                         controller.botaoAtivo.value === 'esportes'
-                          ? '#b0b0b0'
-                          : '#232729'
+                          ? '#1F232D'
+                          : '#0D111B'
                       "
                       width="100%"
                       height="100"
@@ -109,8 +110,8 @@
                     <v-btn
                       :color="
                         controller.botaoAtivo.value === 'eventos'
-                          ? '#b0b0b0'
-                          : '#232729'
+                          ? '#1F232D'
+                          : '#0D111B'
                       "
                       width="100%"
                       height="100"
@@ -135,22 +136,16 @@
                 <div
                   class="d-flex flex-column fill-height menu rounded-xl ma-2"
                 >
-                  <v-card
-                    class="ma-4 d-flex justify-center align-center"
-                    elevation="0"
-                  >
+                  <v-card class="ma-4" elevation="0">
                     <dashboard-esportes
-                      v-show="controller.telaEsporte.value"
-                      :controller="controller"
-                    />
-                    <dashboard-eventos
-                      v-show="controller.telaEvento.value"
+                      v-if="controller.telaEsporte.value"
                       :controller="controller"
                     />
                     <dashboard-medalhas
-                      v-show="controller.telaMedalha.value"
+                      v-else-if="controller.telaMedalha.value"
                       :controller="controller"
                     />
+                    <dashboard-eventos v-else :controller="controller" />
                   </v-card>
                 </div>
               </v-col>
@@ -177,11 +172,11 @@ const { controller } = defineProps({
 
 <style>
 .background {
-  background-color: #1b1e20;
+  background-color: #030712;
 }
 
 .menu {
-  background-color: #232729;
+  background-color: #030712;
 }
 
 .card-selecao {
