@@ -10,11 +10,6 @@ export const colunas = [
     sortable: false,
   },
   {
-    title: "Medalhas totais",
-    key: "total_medals",
-    sortable: false,
-  },
-  {
     title: "Medalhas de ouro",
     key: "gold_medals",
     sortable: false,
@@ -27,6 +22,11 @@ export const colunas = [
   {
     title: "Medalhas de bronze",
     key: "bronze_medals",
+    sortable: false,
+  },
+  {
+    title: "Medalhas totais",
+    key: "total_medals",
     sortable: false,
   },
 ];

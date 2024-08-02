@@ -23,10 +23,63 @@
         {{ item.name }}
       </div>
     </template>
+
+    <template v-slot:[`item.gold_medals`]="{ item }">
+      <div class="d-inline-flex">
+        <v-img
+          :src="GoldMedal"
+          width="20"
+          aspect-ratio="16/9"
+          class="mr-3"
+        ></v-img>
+        {{ item.gold_medals }}
+      </div>
+    </template>
+
+    <template v-slot:[`item.silver_medals`]="{ item }">
+      <div class="d-inline-flex">
+        <v-img
+          :src="SilverMedal"
+          width="20"
+          aspect-ratio="16/9"
+          class="mr-3"
+        ></v-img>
+        {{ item.silver_medals }}
+      </div>
+    </template>
+
+    <template v-slot:[`item.bronze_medals`]="{ item }">
+      <div class="d-inline-flex">
+        <v-img
+          :src="BronzeMedal"
+          width="20"
+          aspect-ratio="16/9"
+          class="mr-3"
+        ></v-img>
+        {{ item.bronze_medals }}
+      </div>
+    </template>
+
+    <template v-slot:[`item.total_medals`]="{ item }">
+      <div class="d-inline-flex">
+        <v-img
+          :src="MedalAll"
+          width="20"
+          aspect-ratio="16/9"
+          class="mr-3"
+        ></v-img>
+        {{ item.total_medals }}
+      </div>
+    </template>
   </v-data-table-server>
 </template>
 
 <script setup>
+import GoldMedal from "../../assets/medalGold.svg";
+import SilverMedal from "../../assets/medalSilver.svg";
+import BronzeMedal from "../../assets/medalBronze.svg";
+import MedalAll from "../../assets/medalAll.svg";
+
 const { controller } = defineProps({
   controller: {
     type: Object,

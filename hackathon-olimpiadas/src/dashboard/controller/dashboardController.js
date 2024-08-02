@@ -20,21 +20,16 @@ const dashboardController =
     const isMobile = computed(() => {
       return display.smAndDown.value;
     });
-    const dialogEsportes = ref(false);
-    const esporteSelecionado = ref({});
-
-    const abreDialogEsportes = async (item) => {
-      esporteSelecionado.value = item;
-      dialogEsportes.value = true;
-    };
+    const botaoAtivo = ref("");
 
     const buscaEventos = async () => {
       try {
         telaEsporte.value = false;
         telaMedalha.value = false;
         telaEvento.value = true;
-
+        botaoAtivo.value = "eventos";
         eventos.value = await buscaEventosUseCase();
+        console.log(eventos.value);
       } catch {}
     };
 
@@ -44,21 +39,23 @@ const dashboardController =
         telaEsporte.value = false;
         telaEvento.value = false;
         telaMedalha.value = true;
+        botaoAtivo.value = "medalhas";
         const { itens, count } = await buscaMedalhasUseCase(options.page);
         medalhas.value = itens;
         totalItens.value = count;
 
         carregando.value = false;
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
 
     const buscaEsportes = async () => {
-      telaEvento.value = false;
-      telaMedalha.value = false;
-      telaEsporte.value = true;
-      esportes.value = await buscaEsportesUseCase();
+      try {
+        telaEvento.value = false;
+        telaMedalha.value = false;
+        telaEsporte.value = true;
+        botaoAtivo.value = "esportes";
+        esportes.value = await buscaEsportesUseCase();
+      } catch (error) {}
     };
 
     const linksExternos = [
@@ -126,10 +123,8 @@ const dashboardController =
       buscaMedalhas,
       buscaEsportes,
       isMobile,
-      dialogEsportes,
-      abreDialogEsportes,
-      esporteSelecionado,
       linksExternos,
+      botaoAtivo,
     };
   };
 

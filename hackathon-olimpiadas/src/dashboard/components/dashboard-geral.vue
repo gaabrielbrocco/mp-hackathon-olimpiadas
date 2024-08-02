@@ -3,7 +3,7 @@
     <v-main style="padding: 10px 20px">
       <div class="container">
         <v-card
-          class="d-flex flex-column my-2 rounded-xl"
+          class="d-flex flex-column my-5 rounded-xl"
           style="min-height: 810px"
         >
           <v-card-text class="pa-0 background">
@@ -13,14 +13,16 @@
                   <div class="justify-center align-center text-white">
                     <div class="text-h2 ml-10 font-weight-thin mb-4 cor-letra">
                       Jogos Olímpicos
-                      <span style="color: blue">20</span
-                      ><span style="color: white">2</span>
-                      <span style="color: red">4</span>
+                      <div>
+                        <span style="color: blue">20</span
+                        ><span style="color: white">2</span>
+                        <span style="color: red">4</span>
+                      </div>
                     </div>
                   </div>
                 </v-row>
 
-                <v-row class="py-4">
+                <v-row>
                   <v-col cols="12">
                     <v-row class="px-4">
                       <v-icon size="large">mdi-map-marker</v-icon>
@@ -41,7 +43,7 @@
 
                 <v-row class="mb-4">
                   <v-col class="text-justify" cols="12">
-                    <v-row class="d-flex justify-center align-center mt-1"
+                    <v-row class="d-flex justify-center align-center mt-2"
                       >Paris irá sediar as Olimpíadas pela terceira vez:</v-row
                     >
                     <v-row
@@ -55,18 +57,22 @@
                 <v-row class="ma-2">
                   <v-col cols="6" md="12">
                     <v-btn
-                      color="#232729"
+                      :color="
+                        controller.botaoAtivo.value === 'medalhas'
+                          ? '#b0b0b0'
+                          : '#232729'
+                      "
                       height="100"
                       width="100%"
                       rounded="lg"
                       elevation="2"
                       @click="controller.buscaMedalhas"
-                      class="mb-3"
+                      class="mb-1"
                     >
                       <div
                         class="d-flex flex-column justify-center align-center"
                       >
-                        <div class="text-disabled mb-2">Medalhas</div>
+                        <div class="mb-2">Medalhas</div>
                         <v-icon size="40">mdi-medal-outline</v-icon>
                       </div>
                     </v-btn>
@@ -78,18 +84,22 @@
                     class="d-flex justify-center align-center"
                   >
                     <v-btn
-                      color="#232729"
+                      :color="
+                        controller.botaoAtivo.value === 'esportes'
+                          ? '#b0b0b0'
+                          : '#232729'
+                      "
                       width="100%"
                       height="100"
                       rounded="lg"
                       elevation="2"
                       @click="controller.buscaEsportes"
-                      class="mb-3"
+                      class="mb-1"
                     >
                       <div
                         class="d-flex flex-column justify-center align-center"
                       >
-                        <div class="text-disabled mb-2">Esportes</div>
+                        <div class="mb-2">Esportes</div>
                         <v-icon size="40">mdi-swim</v-icon>
                       </div>
                     </v-btn>
@@ -97,19 +107,23 @@
 
                   <v-col cols="12" class="d-flex justify-center align-center">
                     <v-btn
-                      color="#232729"
+                      :color="
+                        controller.botaoAtivo.value === 'eventos'
+                          ? '#b0b0b0'
+                          : '#232729'
+                      "
                       width="100%"
                       height="100"
                       rounded="lg"
                       elevation="2"
                       block
                       @click="controller.buscaEventos"
-                      class="mb-3"
+                      class="mb-1"
                     >
                       <div
                         class="d-flex flex-column justify-center align-center"
                       >
-                        <div class="text-disabled mb-2">Eventos</div>
+                        <div class="mb-2">Eventos</div>
                         <v-icon size="40">mdi-calendar-today</v-icon>
                       </div>
                     </v-btn>
@@ -175,6 +189,6 @@ const { controller } = defineProps({
 }
 
 .item {
-  background-color: #f7b91a;
+  background-color: #b0b0b0;
 }
 </style>

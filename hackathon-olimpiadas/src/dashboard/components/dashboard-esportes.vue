@@ -9,7 +9,7 @@
       lg="4"
     >
       <v-card
-        class="mx-auto py-3 rounded-lg card-esportes"
+        class="mx-auto py-2 rounded-lg card-esportes"
         :class="['card-responsive']"
         height="120"
         width="350"
@@ -23,20 +23,18 @@
             </v-card-title>
             <v-card-subtitle>
               {{ item.id }}
+              <v-img
+                class="mt-1"
+                height="35"
+                width="27"
+                src="https://olympics.com/_pr/topic-assets/paris-2024/emblem-oly.svg"
+              ></v-img>
             </v-card-subtitle>
           </v-col>
           <v-col cols="4">
             <v-card-subtitle class="mt-3">
               <v-img height="70" :src="item.pictogram_url_dark"> </v-img>
             </v-card-subtitle>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="4" class="mt-3 d-flex align-end justify-end">
-            <v-img
-              height="70"
-              src="https://olympics.com/_pr/topic-assets/paris-2024/emblem-oly.svg"
-            ></v-img>
           </v-col>
         </v-row>
       </v-card>
@@ -56,6 +54,7 @@ const { controller } = defineProps({
 <style scoped>
 .card-esportes {
   background: linear-gradient(90deg, rgb(0, 56, 83) 0%, rgb(23, 183, 176) 100%);
+  /* background: linear-gradient(90deg, rgb(0, 44, 73) 0%, rgb(2, 121, 218) 100%); */
   transition: transform 0.3s ease-in-out;
 }
 
