@@ -30,9 +30,9 @@ class Evento {
     this.status = status;
     this.is_medal_event = is_medal_event;
     this.is_live = is_live;
-    this.competitors = competitors.map(
-      (competitor) => new Competitors(competitor)
-    );
+    this.competitors = competitors
+      .filter((competitor) => competitor.country_id)
+      .map((competitor) => new Competitors(competitor));
   }
 }
 

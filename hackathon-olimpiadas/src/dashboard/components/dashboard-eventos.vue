@@ -73,21 +73,31 @@
               class="mr-2"
               cover
               max-width="35"
-              :src="item.competitors[0].country_flag_url"
+              :src="
+                item.competitors.length && item.competitors.length <= 2
+                  ? item.competitors[0].country_flag_url
+                  : null
+              "
             >
             </v-img>
             {{
-              item.competitors.length <= 2
+              item.competitors.length && item.competitors.length <= 2
                 ? item.competitors[0].country_id
                 : null
             }}
           </v-col>
           <v-col cols="2" class="d-flex justify-center align-center">
-            <div>X</div>
+            <div class="text-h6">
+              {{
+                item.competitors.length && item.competitors.length <= 2
+                  ? "X"
+                  : ""
+              }}
+            </div>
           </v-col>
           <v-col cols="5" class="d-flex justify-center align-center">
             {{
-              item.competitors.length <= 2
+              item.competitors.length && item.competitors.length <= 2
                 ? item.competitors[1].country_id
                 : null
             }}
@@ -95,13 +105,26 @@
               class="ml-2"
               max-width="35"
               cover
-              :src="item.competitors[1].country_flag_url"
+              :src="
+                item.competitors.length && item.competitors.length <= 2
+                  ? item.competitors[1].country_flag_url
+                  : null
+              "
             >
             </v-img>
           </v-col>
         </v-row>
       </v-card>
     </v-col>
+    <v-row class="d-flex justify-center align-center mt-4">
+      <v-pagination
+        v-model="controller.page.value"
+        rounded="circle"
+        density="compact"
+        :length="controller.totalEventos.value"
+        @update:model-value="controller.buscaEventos(controller.page.value)"
+      ></v-pagination>
+    </v-row>
   </v-row>
 </template>
 

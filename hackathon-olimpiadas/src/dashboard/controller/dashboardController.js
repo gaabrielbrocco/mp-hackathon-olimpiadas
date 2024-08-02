@@ -1,4 +1,4 @@
-import { computed, ref } from "vue";
+import { computed, onBeforeMount, onMounted, ref } from "vue";
 import { colunas } from "../const/colunas";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 
@@ -17,19 +17,33 @@ const dashboardController =
     const carregando = ref(false);
     const itemsPerPage = ref(50);
     const display = useDisplay();
+    const botaoAtivo = ref("");
+    const page = ref(1);
+    const totalEventos = ref(0);
     const isMobile = computed(() => {
       return display.smAndDown.value;
     });
-    const botaoAtivo = ref("");
 
-    const buscaEventos = async () => {
+    onMounted(async () => {
+      await buscaMedalhas();
+    });
+
+    onBeforeMount(async () => {
+      await buscaEventos();
+    });
+
+    const buscaEventos = async (params) => {
       try {
         telaEsporte.value = false;
         telaMedalha.value = false;
         telaEvento.value = true;
         botaoAtivo.value = "eventos";
-        eventos.value = await buscaEventosUseCase();
-      } catch {}
+        const { itens, paginacao } = await buscaEventosUseCase(params);
+        eventos.value = itens;
+        totalEventos.value = paginacao.last_page;
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     const buscaMedalhas = async (options) => {
@@ -120,10 +134,12 @@ const dashboardController =
       totalItens,
       buscaEventos,
       buscaMedalhas,
+      totalEventos,
       buscaEsportes,
       isMobile,
       linksExternos,
       botaoAtivo,
+      page,
     };
   };
 
