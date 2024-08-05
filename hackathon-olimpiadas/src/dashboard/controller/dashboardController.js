@@ -1,12 +1,16 @@
 import { computed, onBeforeMount, onMounted, ref } from "vue";
 import { colunas } from "../const/colunas";
 import { useDisplay } from "vuetify/lib/framework.mjs";
+import Evento from "../domain/model/evento";
+import Competitors from "../domain/model/competitors";
 
 const dashboardController =
   (buscaMedalhasUseCase, buscaEsportesUseCase, buscaEventosUseCase) => () => {
     const medalhas = ref([]);
     const esportes = ref([]);
     const eventos = ref([]);
+    const modelEventos = ref(new Evento({}));
+    const modelCompetidores = ref(new Competitors({}));
     const telaEsporte = ref(false);
     const telaEvento = ref(false);
     const telaMedalha = ref(false);
@@ -24,7 +28,7 @@ const dashboardController =
       return display.smAndDown.value;
     });
     const dialogEvento = ref(false);
-    const dialogAdversarios = ref(false);
+    const dialogCompetidores = ref(false);
 
     onMounted(async () => {
       await buscaMedalhas();
@@ -71,6 +75,18 @@ const dashboardController =
         botaoAtivo.value = "esportes";
         esportes.value = await buscaEsportesUseCase();
       } catch (error) {}
+    };
+
+    const abreDialogEvento = async (item) => {
+      modelEventos.value = { ...item };
+      dialogEvento.value = true;
+    };
+
+    const verificaPosicao = async (item) => {
+      console.log(item);
+      if (item === "1") return "yellow";
+      if (item === "2") return "#c0c0c0";
+      if (item === "3") return "#cd7f32";
     };
 
     const linksExternos = [
@@ -143,7 +159,11 @@ const dashboardController =
       botaoAtivo,
       page,
       dialogEvento,
-      dialogAdversarios,
+      dialogCompetidores,
+      abreDialogEvento,
+      modelCompetidores,
+      modelEventos,
+      verificaPosicao,
     };
   };
 

@@ -2,13 +2,13 @@
   <v-container class="pa-0">
     <v-main height="calc(100vh - 270px)">
       <div class="container">
-        <v-card class="d-flex flex-column rounded-xl">
+        <v-card class="d-flex flex-column rounded-xl mt-8">
           <v-card-text class="pa-0 background">
             <v-row>
               <v-col cols="12" md="3" class="d-flex flex-column align-center">
                 <v-row class="d-flex justify-center align-center my-3">
                   <div class="justify-center align-center text-white">
-                    <div class="text-h2 ml-10 font-weight-thin mb-4 cor-letra">
+                    <div class="text-h2 px-10 font-weight-thin mb-4 cor-letra">
                       Jogos Olímpicos
                       <div>
                         <span style="color: blue">20</span
