@@ -23,6 +23,8 @@ const dashboardController =
     const isMobile = computed(() => {
       return display.smAndDown.value;
     });
+    const dialogEvento = ref(false);
+    const dialogAdversarios = ref(false);
 
     onMounted(async () => {
       await buscaMedalhas();
@@ -140,6 +142,8 @@ const dashboardController =
       linksExternos,
       botaoAtivo,
       page,
+      dialogEvento,
+      dialogAdversarios,
     };
   };
 

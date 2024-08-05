@@ -1,11 +1,8 @@
 <template>
-  <v-container>
-    <v-main style="padding: 10px 20px">
+  <v-container class="pa-0">
+    <v-main height="calc(100vh - 270px)">
       <div class="container">
-        <v-card
-          class="d-flex flex-column my-5 rounded-xl"
-          style="min-height: 810px"
-        >
+        <v-card class="d-flex flex-column rounded-xl">
           <v-card-text class="pa-0 background">
             <v-row>
               <v-col cols="12" md="3" class="d-flex flex-column align-center">
@@ -23,15 +20,15 @@
                 </v-row>
 
                 <v-row>
-                  <v-col cols="12">
+                  <v-col cols="12" lg="12" md="12" sm="12">
                     <v-row class="px-4">
                       <v-icon size="large">mdi-map-marker</v-icon>
                       <span
-                        class="text-disabled px-2 mr-10"
+                        class="text-disabled px-2 mr-5"
                         style="font-size: 15px"
                         >Paris, França</span
                       >
-                      <v-icon size="large" class="ml-10"
+                      <v-icon size="large" class="ml-5"
                         >mdi-calendar-month</v-icon
                       >
                       <span class="text-disabled px-2" style="font-size: 15px"
@@ -44,8 +41,8 @@
                 <v-row class="mb-4">
                   <v-col class="text-justify" cols="12">
                     <v-row
-                      class="d-flex justify-center text-h6 font-weight-thin align-center mt-2"
-                      >Paris irá sediar as Olimpíadas pela terceira vez:</v-row
+                      class="d-flex justify-center text-h6 font-weight-thin align-center mt-2 px-10"
+                      >Olimpíadas em Paris:</v-row
                     >
                     <v-row
                       class="d-flex justify-center align-center font-weight-thin text-h6 py-2"

@@ -1,6 +1,6 @@
 <template>
   <v-row class="background-color d-flex justify-center align-center">
-    <v-col cols="3">
+    <v-col cols="3" lg="3" sm="12">
       <v-autocomplete
         label="País"
         density="compact"
@@ -9,7 +9,7 @@
         color="white"
       ></v-autocomplete>
     </v-col>
-    <v-col cols="3" class="d-flex justify-center align-center">
+    <v-col cols="3" lg="3" sm="12" class="d-flex justify-center align-center">
       <v-autocomplete
         label="Esporte"
         density="compact"
@@ -29,7 +29,7 @@
     </v-col>
   </v-row>
 
-  <v-row class="py-10 mt-0 background">
+  <v-row class="py-15 background">
     <v-col
       cols="12"
       lg="6"
@@ -38,7 +38,7 @@
       v-for="(item, index) in controller.eventos.value"
       :key="index"
     >
-      <v-card variant="outlined" height="170" width="450" class="rounded-lg">
+      <v-card variant="outlined" height="220" width="450" class="rounded-lg">
         <v-row class="mt-2 mx-2">
           <v-chip variant="elevated" class="mb-1" size="small" color="white">
             {{ dayjs(item.day).format("DD/MM/YYYY") }} -
@@ -114,6 +114,15 @@
             </v-img>
           </v-col>
         </v-row>
+        <v-card-actions class="mt-3">
+          <v-btn
+            color="white"
+            text="Ver detalhes"
+            block
+            border
+            @click="controller.dialogEvento.value = true"
+          ></v-btn>
+        </v-card-actions>
       </v-card>
     </v-col>
     <v-row class="d-flex justify-center align-center mt-4">
@@ -126,6 +135,86 @@
       ></v-pagination>
     </v-row>
   </v-row>
+  <v-dialog
+    v-model="controller.dialogEvento.value"
+    width="500"
+    opacity="0"
+    scrollable
+    class="ma-2"
+  >
+    <v-card class="card-color rounded-xl">
+      <v-card-title class="pa-0">
+        <v-toolbar flat density="compact" color="white" outlined>
+          <div class="ml-2">Detalhes do evento</div>
+          <v-spacer></v-spacer>
+          <v-btn
+            @click="controller.dialogEvento.value = false"
+            icon="mdi-close"
+          >
+          </v-btn>
+        </v-toolbar>
+      </v-card-title>
+      <v-card-text>
+        <v-row class="mt-1">
+          <v-col cols="12" lg="6">
+            <v-row>
+              <span>
+                <v-text-field density="compact" variant="underlined" disabled=""
+                  >Esporte: Football</v-text-field
+                >
+              </span>
+            </v-row>
+            <v-row>
+              <span>
+                <v-text-field density="compact" variant="underlined" disabled=""
+                  >Gênero: Woman</v-text-field
+                >
+              </span>
+            </v-row>
+            <v-row>
+              <span>
+                <v-text-field density="compact" variant="underlined" disabled=""
+                  >Detalhes: Women's Group B</v-text-field
+                >
+              </span>
+            </v-row>
+            <v-row>
+              <span>
+                <v-text-field density="compact" variant="underlined" disabled=""
+                  >Data de início: 27/07/2024</v-text-field
+                >
+              </span>
+            </v-row>
+            <v-row>
+              <span>
+                <v-text-field density="compact" variant="underlined" disabled=""
+                  >Status: Finished</v-text-field
+                >
+              </span>
+            </v-row>
+          </v-col>
+          <v-col>
+            <v-img
+              class="mt-1"
+              height="110"
+              src="https://olympics.com/_pr/topic-assets/paris-2024/emblem-oly.svg"
+            ></v-img>
+
+            <v-row class="d-flex justify-center align-center py-10">
+              <div>
+                <v-btn
+                  variant="outlined"
+                  @click="controller.dialogAdversarios.value = true"
+                >
+                  Ver adversários
+                </v-btn>
+              </div>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script setup>
@@ -158,12 +247,16 @@ const formattedTime = (item) => {
 
 .background {
   background-color: rgb(var(--v-theme-primary)) !important;
-  height: 720px;
+  height: 715px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 .background-color {
   background-color: rgb(var(--v-theme-primary)) !important;
+}
+
+.card-color {
+  background-color: #1f232d;
 }
 </style>
