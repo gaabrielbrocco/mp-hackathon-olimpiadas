@@ -224,9 +224,7 @@
                   <div>
                     <v-btn
                       variant="outlined"
-                      @click="
-                        controller.dialogCompetidores.value = true
-                      "
+                      @click="controller.dialogCompetidores.value = true"
                     >
                       Competidores
                     </v-btn>
@@ -269,40 +267,62 @@
         </v-toolbar>
       </v-card-title>
 
-      <v-card-text >
-        <div
-        
-          v-for="(item, index) in controller.modelEventos.value.competitors"
-          :key="index"
-        >
-          <v-row>
-            <v-col cols="6">
-              <v-text-field variant="underlined"
-                >{{ item.competitor_name }} -
-                {{ item.country_id }}
-              </v-text-field>
-
-              
-
-          </v-col>
-          <v-col cols="1"
-          ><v-img :src="item.country_flag_url" height="30" class="mt-5"</v-img
-          ></v-col>
-          <v-col v-if="item.result_winnerLoserTie">
-            <v-icon :icon="item.result_winnerLoserTie === 'W' ? 'mdi-crown' : ''" class="mt-5" color="warning" size="x-large"</v-icon>
-          </v-col>
-
-
-            <v-col cols="5" class="mt-5" v-else>
-              <v-icon v-if="item.result_position === '1'" icon="mdi-medal" color="#D3A01F">
-              </v-icon>
-              <v-icon v-else-if="item.result_position === '2'" icon="mdi-medal" color="#C0C0C0">
-              </v-icon>
-              <v-icon v-else-if="item.result_position === '3'" icon="mdi-medal" color="#CD7F32">
-              </v-icon>
+      <v-card-text>
+        <v-container>
+          <v-row
+            v-for="(item, index) in controller.modelEventos.value.competitors"
+            :key="index"
+            class="mb-3"
+          >
+            <v-col cols="12">
+              <v-card outlined class="rounded-lg background-color">
+                <v-row class="pa-3" align="center">
+                  <v-col cols="12" md="4" class="text-center">
+                    <v-img
+                      :src="item.country_flag_url"
+                      height="40"
+                      class="my-2"
+                    ></v-img>
+                  </v-col>
+                  <v-col cols="12" md="4" class="text-center">
+                    <v-card-title class="pa-0">{{
+                      item.competitor_name
+                    }}</v-card-title>
+                    <v-card-subtitle class="pa-0">{{
+                      item.country_id
+                    }}</v-card-subtitle>
+                  </v-col>
+                  <v-col cols="12" md="4" class="text-center">
+                    <v-icon
+                      v-if="item.result_winnerLoserTie === 'W'"
+                      icon="mdi-crown"
+                      color="warning"
+                      size="x-large"
+                    ></v-icon>
+                    <v-icon
+                      v-else-if="item.result_position === '1'"
+                      icon="mdi-medal"
+                      color="#D3A01F"
+                      size="x-large"
+                    ></v-icon>
+                    <v-icon
+                      v-else-if="item.result_position === '2'"
+                      icon="mdi-medal"
+                      color="#C0C0C0"
+                      size="x-large"
+                    ></v-icon>
+                    <v-icon
+                      v-else-if="item.result_position === '3'"
+                      icon="mdi-medal"
+                      color="#CD7F32"
+                      size="large"
+                    ></v-icon>
+                  </v-col>
+                </v-row>
+              </v-card>
             </v-col>
           </v-row>
-        </div>
+        </v-container>
       </v-card-text>
     </v-card>
   </v-dialog>
