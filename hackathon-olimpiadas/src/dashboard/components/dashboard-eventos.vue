@@ -388,7 +388,7 @@ const formattedTime = (item) => {
 .background {
   background-color: rgb(var(--v-theme-primary)) !important;
   overflow-y: auto;
-  height: 715px;
+  height: calc(100vh - 200px);
   overflow-x: hidden;
 }
 

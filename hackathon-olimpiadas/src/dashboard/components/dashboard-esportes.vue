@@ -66,7 +66,7 @@ const { controller } = defineProps({
 
 .background {
   background-color: rgb(var(--v-theme-primary)) !important;
-  height: 779px;
+  height: calc(100vh - 128px);
   overflow-y: auto;
   overflow-x: hidden;
 }
