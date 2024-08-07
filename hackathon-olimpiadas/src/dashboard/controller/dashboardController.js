@@ -4,9 +4,16 @@ import { useDisplay } from "vuetify/lib/framework.mjs";
 import Evento from "../domain/model/evento";
 import Competitors from "../domain/model/competitors";
 import { filtro } from "../const/filtro";
+import { generos } from "../const/generos";
 
 const dashboardController =
-  (buscaMedalhasUseCase, buscaEsportesUseCase, buscaEventosUseCase) => () => {
+  (
+    buscaMedalhasUseCase,
+    buscaEsportesUseCase,
+    buscaEventosUseCase,
+    buscaPaisesUseCase
+  ) =>
+  () => {
     const medalhas = ref([]);
     const esportes = ref([]);
     const eventos = ref([]);
@@ -20,18 +27,21 @@ const dashboardController =
     const totalItens = ref(0);
     const paginacaoTabela = ref({});
     const carregando = ref(false);
+    const carregandoPaises = ref(false);
     const itemsPerPage = ref(50);
     const display = useDisplay();
     const botaoAtivo = ref("");
     const page = ref(1);
     const totalEventos = ref(0);
     const filtroEvento = ref(filtro);
+    const paisesFiltro = ref([]);
+    const totalPaisesFiltro = ref(0);
+    const generosFiltro = ref(generos);
     const isMobile = computed(() => {
       return display.smAndDown.value;
     });
     const dialogEvento = ref(false);
     const dialogCompetidores = ref(false);
-    const meta = ref({});
 
     onMounted(async () => {
       await buscaMedalhas();
@@ -53,10 +63,10 @@ const dashboardController =
           camposLimpos,
           page.value
         );
-        console.log(paginacao);
         eventos.value = itens;
         totalEventos.value = paginacao.last_page;
-        meta.value = paginacao;
+        await buscaPaises();
+        await buscaEsportesFiltro();
       } catch (error) {
         console.log(error);
       }
@@ -92,9 +102,9 @@ const dashboardController =
       dialogEvento.value = true;
     };
 
-    const filtrar = async () => {
+    const filtrar = async (param) => {
       try {
-        await buscaEventos();
+        await buscaEventos(param);
       } catch (error) {
         console.log(error);
       }
@@ -103,11 +113,32 @@ const dashboardController =
     const limpaFiltros = (filtro) => {
       const cleaned = {};
       for (const key in filtro) {
-        if (filtro[key] && filtro[key] !== "") {
+        if (filtro[key] && filtro[key] !== "Nenhum") {
           cleaned[key] = filtro[key];
         }
       }
       return cleaned;
+    };
+
+    const buscaPaises = async () => {
+      try {
+        carregandoPaises.value = true;
+        const { itens, count } = await buscaPaisesUseCase();
+        paisesFiltro.value = itens;
+        totalPaisesFiltro.value = count;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        carregandoPaises.value = false;
+      }
+    };
+
+    const buscaEsportesFiltro = async () => {
+      try {
+        esportes.value = await buscaEsportesUseCase();
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     const linksExternos = [
@@ -162,6 +193,7 @@ const dashboardController =
       medalhas,
       esportes,
       eventos,
+      generosFiltro,
       telaEsporte,
       telaEvento,
       carregando,
@@ -170,12 +202,16 @@ const dashboardController =
       itemsPerPage,
       colunasTabela,
       linhasTabela,
+      paisesFiltro,
+      buscaPaises,
+      totalPaisesFiltro,
+      carregandoPaises,
+      buscaEsportesFiltro,
       totalItens,
       buscaEventos,
       limpaFiltros,
       buscaMedalhas,
       totalEventos,
-      meta,
       buscaEsportes,
       isMobile,
       linksExternos,

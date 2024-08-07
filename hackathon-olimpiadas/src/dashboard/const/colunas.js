@@ -1,31 +1,31 @@
 export const colunas = [
   {
-    title: "Colocação",
+    title: "Rank",
     key: "rank",
     sortable: false,
   },
   {
-    title: "País",
+    title: "Name",
     key: "name",
     sortable: false,
   },
   {
-    title: "Medalhas de ouro",
+    title: "Gold Medals",
     key: "gold_medals",
     sortable: false,
   },
   {
-    title: "Medalhas de prata",
+    title: "Silver Medals",
     key: "silver_medals",
     sortable: false,
   },
   {
-    title: "Medalhas de bronze",
+    title: "Bronze Medals",
     key: "bronze_medals",
     sortable: false,
   },
   {
-    title: "Medalhas totais",
+    title: "Total Medals",
     key: "total_medals",
     sortable: false,
   },

@@ -1,47 +1,42 @@
 <template>
   <v-row class="background-color d-flex justify-center align-center">
     <v-col cols="12" lg="3" sm="12">
-      <v-text-field
-        label="Data"
-        type="date"
-        class="mt-5"
-        variant="underlined"
-        density="compact"
-        v-model="controller.filtroEvento.value.date"
-        @update:model-value="controller.filtrar"
-      ></v-text-field>
-    </v-col>
-    <v-col cols="12" lg="3" sm="12">
       <v-autocomplete
+        theme="light"
         label="País"
-        density="compact"
         hide-details
         variant="underlined"
         color="white"
+        :loading="controller.carregandoPaises.value"
+        :items="controller.paisesFiltro.value"
         v-model="controller.filtroEvento.value.country"
-        @update:model-value="controller.filtrar"
+        @update:model-value="controller.filtrar(controller.filtroEvento.value)"
       ></v-autocomplete>
     </v-col>
     <v-col cols="12" lg="3" sm="12" class="d-flex justify-center align-center">
       <v-autocomplete
+        theme="light"
         label="Esporte"
-        density="compact"
         hide-details
         variant="underlined"
         color="white"
+        :items="controller.esportes.value"
+        item-title="name"
+        item-value="id"
         v-model="controller.filtroEvento.value.discipline"
-        @update:model-value="controller.filtrar"
+        @update:model-value="controller.filtrar(controller.filtroEvento.value)"
       ></v-autocomplete>
     </v-col>
     <v-col cols="12" lg="3" sm="12" class="d-flex justify-center align-center">
       <v-autocomplete
+        theme="light"
         label="Gênero"
-        density="compact"
         hide-details
         variant="underlined"
         color="white"
         v-model="controller.filtroEvento.value.gender"
-        @update:model-value="controller.filtrar"
+        :items="controller.generosFiltro.value"
+        @update:model-value="controller.filtrar(controller.filtroEvento.value)"
       ></v-autocomplete>
     </v-col>
   </v-row>
@@ -55,27 +50,26 @@
       v-for="(item, index) in controller.eventos.value"
       :key="index"
     >
-      <v-card variant="outlined" height="220" width="450" class="rounded-lg">
-        <v-row class="mt-2 mx-2">
-          <v-chip variant="elevated" class="mb-1" size="small" color="white">
-            {{ dayjs(item.day).format("DD/MM/YYYY") }} -
-            {{ formattedTime(item.start_date) }}
-          </v-chip>
+      <v-card variant="text" height="240" width="450" class="rounded-lg">
+        <v-toolbar density="compact" color="#1F232D" flat>
+          <v-row class="mx-2">
+            <v-chip variant="elevated" class="mb-1" size="small" color="white">
+              {{ dayjs(item.day).format("DD/MM/YYYY") }} -
+              {{ formattedTime(item.start_date) }}
+            </v-chip>
 
-          <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
 
-          <v-chip
-            variant="elevated"
-            class="mb-1"
-            size="small"
-            :color="item.status === 'Finished' ? 'red' : 'green'"
-          >
-            {{ item.status }}
-          </v-chip>
-        </v-row>
-        <v-row
-          ><v-divider class="border-opacity-100" color="white"></v-divider
-        ></v-row>
+            <v-chip
+              variant="elevated"
+              class="mb-1"
+              size="small"
+              :color="item.status === 'Finished' ? 'red' : 'green'"
+            >
+              {{ item.status }}
+            </v-chip>
+          </v-row>
+        </v-toolbar>
 
         <v-card-title class="mt-2 d-flex justify-center align-center">
           {{ item.discipline_name }}
@@ -114,7 +108,7 @@
           </v-col>
           <v-col cols="5" class="d-flex justify-center align-center">
             {{
-              item.competitors.length && item.competitors.length <= 2
+              item.competitors.length && item.competitors.length > 1
                 ? item.competitors[1].country_id
                 : null
             }}
@@ -123,7 +117,7 @@
               max-width="35"
               cover
               :src="
-                item.competitors.length && item.competitors.length <= 2
+                item.competitors.length && item.competitors.length > 1
                   ? item.competitors[1].country_flag_url
                   : null
               "
@@ -256,29 +250,14 @@
     </v-col>
 
     <v-row class="d-flex justify-center align-center mt-5">
-      <!-- {{ controller.page.value }}
-
       <v-pagination
         v-model="controller.page.value"
         rounded="circle"
         density="compact"
         :length="controller.totalEventos.value"
-        @update:model-value="controller.buscaEventos"
-      ></v-pagination> -->
-      <div v-for="item in controller.meta.value.links">
-        <span
-          v-html="item.label"
-          class="mx-2"
-          :class="{ 'bg-secondary': item.active }"
-          @click="
-            () => {
-              controller.page.value = parseInt(item.label);
-              controller.buscaEventos();
-            }
-          "
-        >
-        </span>
-      </div>
+        @update:model-value="controller.buscaEventos(controller.page.value)"
+        :total-visible="10"
+      ></v-pagination>
     </v-row>
   </v-row>
   <v-dialog
@@ -419,6 +398,7 @@ const formattedTime = (item) => {
 }
 
 .card-color {
-  background-color: #1f232d;
+  /* background-color: #1f232d; */
+  background-color: rgb(var(--v-theme-primary)) !important;
 }
 </style>
