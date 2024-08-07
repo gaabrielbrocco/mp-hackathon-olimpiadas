@@ -1,5 +1,5 @@
 export const filtro = {
-  country: "Nenhum",
-  discipline: "Nenhum",
-  gender: "Nenhum",
+  country: "None",
+  discipline: "None",
+  gender: "None",
 };

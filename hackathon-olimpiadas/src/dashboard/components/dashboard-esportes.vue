@@ -15,7 +15,7 @@
         width="350"
         :href="controller.linksExternos[index]"
         target="_blank"
-        variant="outlined"
+        variant="tonal"
       >
         <v-row>
           <v-col cols="8">

@@ -113,7 +113,7 @@ const dashboardController =
     const limpaFiltros = (filtro) => {
       const cleaned = {};
       for (const key in filtro) {
-        if (filtro[key] && filtro[key] !== "Nenhum") {
+        if (filtro[key] && filtro[key] !== "None") {
           cleaned[key] = filtro[key];
         }
       }

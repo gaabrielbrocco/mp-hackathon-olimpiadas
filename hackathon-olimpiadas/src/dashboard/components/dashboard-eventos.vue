@@ -3,7 +3,7 @@
     <v-col cols="12" lg="3" sm="12">
       <v-autocomplete
         theme="light"
-        label="País"
+        label="Country"
         hide-details
         variant="underlined"
         color="white"
@@ -16,7 +16,7 @@
     <v-col cols="12" lg="3" sm="12" class="d-flex justify-center align-center">
       <v-autocomplete
         theme="light"
-        label="Esporte"
+        label="Sport"
         hide-details
         variant="underlined"
         color="white"
@@ -30,7 +30,7 @@
     <v-col cols="12" lg="3" sm="12" class="d-flex justify-center align-center">
       <v-autocomplete
         theme="light"
-        label="Gênero"
+        label="Gender"
         hide-details
         variant="underlined"
         color="white"
@@ -50,7 +50,7 @@
       v-for="(item, index) in controller.eventos.value"
       :key="index"
     >
-      <v-card variant="text" height="240" width="450" class="rounded-lg">
+      <v-card variant="text" height="270" width="450" class="rounded-lg">
         <v-toolbar density="compact" color="#1F232D" flat>
           <v-row class="mx-2">
             <v-chip variant="elevated" class="mb-1" size="small" color="white">
@@ -128,7 +128,7 @@
         <v-card-actions class="mt-3">
           <v-btn
             color="white"
-            text="Ver detalhes"
+            text="See details"
             block
             border
             @click="controller.abreDialogEvento(item)"
@@ -147,7 +147,7 @@
         <v-card class="card-color rounded-xl">
           <v-card-title class="pa-0">
             <v-toolbar flat color="white" outlined>
-              <div class="ml-4">Detalhes do evento</div>
+              <div class="ml-4">Event details</div>
               <v-spacer></v-spacer>
               <v-btn
                 @click="controller.dialogEvento.value = false"
@@ -165,7 +165,7 @@
                       density="compact"
                       variant="underlined"
                       disabled
-                      >Esporte:
+                      >Sport:
                       {{
                         controller.modelEventos.value.discipline_name
                       }}</v-text-field
@@ -178,7 +178,7 @@
                       density="compact"
                       variant="underlined"
                       disabled=""
-                      >Gênero:
+                      >Gender:
                       {{
                         controller.modelEventos.value.event_name
                       }}</v-text-field
@@ -191,7 +191,7 @@
                       density="compact"
                       variant="underlined"
                       disabled=""
-                      >Detalhes:
+                      >Details:
                       {{
                         controller.modelEventos.value.detailed_event_name
                       }}</v-text-field
@@ -204,7 +204,7 @@
                       density="compact"
                       variant="underlined"
                       disabled=""
-                      >Data de início:
+                      >Start date:
                       {{
                         dayjs(controller.modelEventos.value.day).format(
                           "DD/MM/YYYY"
@@ -238,7 +238,7 @@
                       variant="outlined"
                       @click="controller.dialogCompetidores.value = true"
                     >
-                      Competidores
+                      Competitors
                     </v-btn>
                   </div>
                 </v-row>
@@ -271,7 +271,7 @@
     <v-card class="card-color rounded-xl">
       <v-card-title class="pa-0">
         <v-toolbar flat color="white" outlined>
-          <div class="ml-4">Competidores</div>
+          <div class="ml-4">Competitors</div>
           <v-spacer></v-spacer>
           <v-btn
             @click="controller.dialogCompetidores.value = false"
@@ -344,7 +344,7 @@
                             : 'color: gray'
                         "
                       >
-                        Pontuação: {{ item.result_mark }}
+                        Score: {{ item.result_mark }}
                       </div>
                     </v-card-text>
                   </v-col>
@@ -382,14 +382,13 @@ const formattedTime = (item) => {
 <style scoped>
 .card-titulo {
   background: linear-gradient(90deg, rgb(0, 56, 83) 0%, rgb(23, 183, 176) 100%);
-  /* background: linear-gradient(90deg, rgb(0, 44, 73) 0%, rgb(2, 121, 218) 100%); */
   transition: transform 0.3s ease-in-out;
 }
 
 .background {
   background-color: rgb(var(--v-theme-primary)) !important;
-  height: 715px;
   overflow-y: auto;
+  height: 715px;
   overflow-x: hidden;
 }
 
@@ -398,7 +397,6 @@ const formattedTime = (item) => {
 }
 
 .card-color {
-  /* background-color: #1f232d; */
   background-color: rgb(var(--v-theme-primary)) !important;
 }
 </style>

@@ -9,7 +9,7 @@
                 <v-row class="d-flex justify-center align-center my-3">
                   <div class="justify-center align-center text-white">
                     <div class="text-h2 px-10 font-weight-thin mb-4 cor-letra">
-                      Jogos Olímpicos
+                      Olympic Games
                       <div>
                         <span style="color: blue">20</span
                         ><span style="color: white">2</span>
@@ -26,7 +26,7 @@
                       <span
                         class="text-disabled px-2 mr-5"
                         style="font-size: 15px"
-                        >Paris, França</span
+                        >Paris, France</span
                       >
                       <v-icon size="large" class="ml-5"
                         >mdi-calendar-month</v-icon
@@ -42,7 +42,7 @@
                   <v-col class="text-justify" cols="12">
                     <v-row
                       class="d-flex justify-center text-h6 font-weight-thin align-center mt-2 px-10"
-                      >Olimpíadas em Paris:</v-row
+                      >Olympics in Paris:</v-row
                     >
                     <v-row
                       class="d-flex justify-center align-center font-weight-thin text-h6 py-2"
@@ -70,7 +70,7 @@
                       <div
                         class="d-flex flex-column justify-center align-center"
                       >
-                        <div class="mb-2">Medalhas</div>
+                        <div class="mb-2">Medals</div>
                         <v-icon size="40">mdi-medal-outline</v-icon>
                       </div>
                     </v-btn>
@@ -97,7 +97,7 @@
                       <div
                         class="d-flex flex-column justify-center align-center"
                       >
-                        <div class="mb-2">Esportes</div>
+                        <div class="mb-2">Sports</div>
                         <v-icon size="40">mdi-swim</v-icon>
                       </div>
                     </v-btn>
@@ -121,7 +121,7 @@
                       <div
                         class="d-flex flex-column justify-center align-center"
                       >
-                        <div class="mb-2">Eventos</div>
+                        <div class="mb-2">Events</div>
                         <v-icon size="40">mdi-calendar-today</v-icon>
                       </div>
                     </v-btn>
