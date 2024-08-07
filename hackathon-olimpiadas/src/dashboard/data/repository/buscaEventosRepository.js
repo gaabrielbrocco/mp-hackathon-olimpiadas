@@ -1,9 +1,9 @@
 import Evento from "../../domain/model/evento";
 
-const buscaEventosRepository = (axios) => async (pagina) => {
+const buscaEventosRepository = (axios) => async (filtro, pagina) => {
   try {
     const response = await axios.get("/events", {
-      params: { page: pagina },
+      params: { ...filtro, page: pagina },
     });
     return {
       itens: response?.data?.data.map((item) => new Evento(item)) ?? [],

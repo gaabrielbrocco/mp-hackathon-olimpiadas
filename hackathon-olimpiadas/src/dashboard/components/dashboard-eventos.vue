@@ -1,12 +1,25 @@
 <template>
   <v-row class="background-color d-flex justify-center align-center">
     <v-col cols="12" lg="3" sm="12">
+      <v-text-field
+        label="Data"
+        type="date"
+        class="mt-5"
+        variant="underlined"
+        density="compact"
+        v-model="controller.filtroEvento.value.date"
+        @update:model-value="controller.filtrar"
+      ></v-text-field>
+    </v-col>
+    <v-col cols="12" lg="3" sm="12">
       <v-autocomplete
         label="País"
         density="compact"
         hide-details
-        bg-color="#23272"
+        variant="underlined"
         color="white"
+        v-model="controller.filtroEvento.value.country"
+        @update:model-value="controller.filtrar"
       ></v-autocomplete>
     </v-col>
     <v-col cols="12" lg="3" sm="12" class="d-flex justify-center align-center">
@@ -14,8 +27,10 @@
         label="Esporte"
         density="compact"
         hide-details
-        bg-color="#23272"
+        variant="underlined"
         color="white"
+        v-model="controller.filtroEvento.value.discipline"
+        @update:model-value="controller.filtrar"
       ></v-autocomplete>
     </v-col>
     <v-col cols="12" lg="3" sm="12" class="d-flex justify-center align-center">
@@ -23,8 +38,10 @@
         label="Gênero"
         density="compact"
         hide-details
-        bg-color="#23272"
+        variant="underlined"
         color="white"
+        v-model="controller.filtroEvento.value.gender"
+        @update:model-value="controller.filtrar"
       ></v-autocomplete>
     </v-col>
   </v-row>
@@ -131,11 +148,12 @@
         opacity="0"
         scrollable
         class="ma-2"
+        persistent
       >
         <v-card class="card-color rounded-xl">
           <v-card-title class="pa-0">
-            <v-toolbar flat density="compact" color="white" outlined>
-              <div class="ml-2">Detalhes do evento</div>
+            <v-toolbar flat color="white" outlined>
+              <div class="ml-4">Detalhes do evento</div>
               <v-spacer></v-spacer>
               <v-btn
                 @click="controller.dialogEvento.value = false"
@@ -238,13 +256,29 @@
     </v-col>
 
     <v-row class="d-flex justify-center align-center mt-5">
+      <!-- {{ controller.page.value }}
+
       <v-pagination
         v-model="controller.page.value"
         rounded="circle"
         density="compact"
         :length="controller.totalEventos.value"
-        @update:model-value="controller.buscaEventos(controller.page.value)"
-      ></v-pagination>
+        @update:model-value="controller.buscaEventos"
+      ></v-pagination> -->
+      <div v-for="item in controller.meta.value.links">
+        <span
+          v-html="item.label"
+          class="mx-2"
+          :class="{ 'bg-secondary': item.active }"
+          @click="
+            () => {
+              controller.page.value = parseInt(item.label);
+              controller.buscaEventos();
+            }
+          "
+        >
+        </span>
+      </div>
     </v-row>
   </v-row>
   <v-dialog
@@ -253,11 +287,12 @@
     opacity="0.2"
     scrollable
     class="ma-2"
+    persistent
   >
     <v-card class="card-color rounded-xl">
       <v-card-title class="pa-0">
-        <v-toolbar flat density="compact" color="white" outlined>
-          <div class="ml-2">Competidores</div>
+        <v-toolbar flat color="white" outlined>
+          <div class="ml-4">Competidores</div>
           <v-spacer></v-spacer>
           <v-btn
             @click="controller.dialogCompetidores.value = false"
@@ -288,9 +323,9 @@
                     <v-card-title class="pa-0">{{
                       item.competitor_name
                     }}</v-card-title>
-                    <v-card-subtitle class="pa-0">{{
-                      item.country_id
-                    }}</v-card-subtitle>
+                    <v-card-subtitle class="pa-0"
+                      >{{ item.country_id }}
+                    </v-card-subtitle>
                   </v-col>
                   <v-col cols="12" md="4" class="text-center">
                     <v-icon
@@ -315,8 +350,24 @@
                       v-else-if="item.result_position === '3'"
                       icon="mdi-medal"
                       color="#CD7F32"
-                      size="large"
+                      size="x-large"
                     ></v-icon>
+                    <v-card-text
+                      class="pa-2"
+                      v-if="item.result_winnerLoserTie || item.result_mark"
+                    >
+                      <div
+                        :style="
+                          item.result_position === '1' ||
+                          item.result_position === '2' ||
+                          item.result_position === '3'
+                            ? 'color: white'
+                            : 'color: gray'
+                        "
+                      >
+                        Pontuação: {{ item.result_mark }}
+                      </div>
+                    </v-card-text>
                   </v-col>
                 </v-row>
               </v-card>

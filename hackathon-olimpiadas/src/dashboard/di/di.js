@@ -7,7 +7,7 @@ import buscaQtdMedalhasRepository from "../data/repository/buscaQtdMedalhasRepos
 
 import buscaMedalhasUseCase from "../domain/usecase/buscaMedalhasUseCase";
 import buscaEsportesUseCase from "../domain/usecase/buscaEsportesUseCase";
-import buscaEventosUseCase from "../domain/usecase/buscaEventoUseCase";
+import buscaEventosUseCase from "../domain/usecase/buscaEventosUseCase";
 
 import dashboardController from "../controller/dashboardController";
 

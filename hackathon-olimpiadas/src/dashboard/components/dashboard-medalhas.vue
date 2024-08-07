@@ -91,10 +91,14 @@ const { controller } = defineProps({
 <style scoped>
 .v-table {
   background-color: rgb(var(--v-theme-primary)) !important;
-  height: 749px;
+  height: 755px;
 }
 
 :deep(.v-data-table-footer__items-per-page) {
+  display: none;
+}
+
+:deep(.v-data-table-headers--mobile) {
   display: none;
 }
 </style>

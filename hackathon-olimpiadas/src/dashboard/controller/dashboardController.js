@@ -3,6 +3,7 @@ import { colunas } from "../const/colunas";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import Evento from "../domain/model/evento";
 import Competitors from "../domain/model/competitors";
+import { filtro } from "../const/filtro";
 
 const dashboardController =
   (buscaMedalhasUseCase, buscaEsportesUseCase, buscaEventosUseCase) => () => {
@@ -24,11 +25,13 @@ const dashboardController =
     const botaoAtivo = ref("");
     const page = ref(1);
     const totalEventos = ref(0);
+    const filtroEvento = ref(filtro);
     const isMobile = computed(() => {
       return display.smAndDown.value;
     });
     const dialogEvento = ref(false);
     const dialogCompetidores = ref(false);
+    const meta = ref({});
 
     onMounted(async () => {
       await buscaMedalhas();
@@ -38,15 +41,22 @@ const dashboardController =
       await buscaEventos();
     });
 
-    const buscaEventos = async (params) => {
+    const buscaEventos = async () => {
       try {
         telaEsporte.value = false;
         telaMedalha.value = false;
         telaEvento.value = true;
         botaoAtivo.value = "eventos";
-        const { itens, paginacao } = await buscaEventosUseCase(params);
+        const camposLimpos = limpaFiltros(filtroEvento.value);
+
+        const { itens, paginacao } = await buscaEventosUseCase(
+          camposLimpos,
+          page.value
+        );
+        console.log(paginacao);
         eventos.value = itens;
         totalEventos.value = paginacao.last_page;
+        meta.value = paginacao;
       } catch (error) {
         console.log(error);
       }
@@ -82,11 +92,22 @@ const dashboardController =
       dialogEvento.value = true;
     };
 
-    const verificaPosicao = async (item) => {
-      console.log(item);
-      if (item === "1") return "yellow";
-      if (item === "2") return "#c0c0c0";
-      if (item === "3") return "#cd7f32";
+    const filtrar = async () => {
+      try {
+        await buscaEventos();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const limpaFiltros = (filtro) => {
+      const cleaned = {};
+      for (const key in filtro) {
+        if (filtro[key] && filtro[key] !== "") {
+          cleaned[key] = filtro[key];
+        }
+      }
+      return cleaned;
     };
 
     const linksExternos = [
@@ -151,8 +172,10 @@ const dashboardController =
       linhasTabela,
       totalItens,
       buscaEventos,
+      limpaFiltros,
       buscaMedalhas,
       totalEventos,
+      meta,
       buscaEsportes,
       isMobile,
       linksExternos,
@@ -161,9 +184,10 @@ const dashboardController =
       dialogEvento,
       dialogCompetidores,
       abreDialogEvento,
+      filtroEvento,
       modelCompetidores,
+      filtrar,
       modelEventos,
-      verificaPosicao,
     };
   };
 
